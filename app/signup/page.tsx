@@ -16,8 +16,6 @@ import { toast } from "react-toastify";
 import { useRouter } from 'next/navigation';
 import { Audio, FidgetSpinner } from 'react-loader-spinner';
 import { Loader, Loader2 } from "lucide-react";
-export const description =
-  "A login form with email and password. There's an option to login with Google and a link to sign up if you don't have an account.";
 
 export default function LoginForm() {
   const router = useRouter();
@@ -27,8 +25,6 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [result, setResult] = useState(null);
  type R1 = {
     data:{
       token:string
@@ -119,15 +115,9 @@ export default function LoginForm() {
               {isLoading && <Loader/>}
             </Button>
           </div>
-          {error && <p className="text-red-500">{error}</p>}
-          {result && (
-            <p className="text-green-500">
-              {/* Sign up successful! User: {result.user?.name} (Token: {result.token}) */}
-            </p>
-          )}
           <div className="mt-4 text-center text-sm">
             Already have an account?{" "}
-            <Link href="/login" className="underline">
+            <Link href="/signin" className="underline">
               Login
             </Link>
           </div>
