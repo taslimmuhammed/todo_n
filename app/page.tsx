@@ -1,101 +1,126 @@
-import Image from "next/image";
+'use client';
+import {
+  Home,
+  PanelLeft,
+  Calendar,
+  PersonStandingIcon
+} from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
+import { useState } from "react"
+import Todomain from "@/components/my_components/TodoMain"
+import Calendarmain from "@/components/my_components/CalenderMain";
+import ProfileMain from "@/components/my_components/ProfileMain";
 
-export default function Home() {
+
+export const description =
+  "An products dashboard with a sidebar navigation. The sidebar has icon navigation. The content area has a breadcrumb and search in the header. It displays a list of products in a table with actions."
+
+export default function Dashboard() {
+  const [Screen, setScreen] = useState(0);
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <TooltipProvider>
+    <div className="flex min-h-screen w-full flex-col bg-muted/40">
+     
+      <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
+        <nav className="flex flex-col items-center gap-4 px-2 py-4">
+          <div
+            className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
           >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+            {/* <Package2 className="h-4 w-4 transition-all group-hover:scale-110" /> */}
+            <span className="sr-only">todo</span>
+          </div>
+          
+          <Tooltip>
+            <TooltipTrigger asChild onClick={()=>setScreen(0)}>
+              <div
+                className="flex h-9 w-9 items-center justify-center rounded-lg  transition-colors hover:text-foreground md:h-8 md:w-8"
+                
+              >
+                <Home className="h-5 w-5" />
+                <span className="sr-only">Dashboard</span>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent side="right">Dashboard</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild onClick={()=>setScreen(1)}>
+              <div
+                    className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                   
+              >
+                <Calendar className="h-5 w-5" />
+                <span className="sr-only">Calender</span>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent side="right">Calender</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild onClick={()=>setScreen(2)}>
+              <div
+                    className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                   
+              >
+                <PersonStandingIcon className="h-5 w-5" />
+                <span className="sr-only">Profile</span>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent side="right">Profile</TooltipContent>
+          </Tooltip>
+        </nav>
+      </aside>
+      <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
+        <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+          <Sheet>
+            <SheetTrigger asChild >
+              <Button size="icon" variant="outline" className="sm:hidden">
+                <PanelLeft className="h-5 w-5" />
+                <span className="sr-only">Toggle Menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="sm:max-w-xs">
+              <nav className="grid gap-6 text-lg font-medium">
+                <div
+                  className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
+                >
+                  <span className="sr-only">todo</span>
+                </div>
+                <div
+                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                  onClick={()=>setScreen(0)}
+                >
+                  <Home className="h-5 w-5" />
+                  Dashboard
+                </div>
+                <div
+                  className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
+                  onClick={()=>setScreen(1)}
+                >
+                  <Calendar className="h-5 w-5" />
+                  Calender
+                </div>
+                <div
+                  className="flex items-center gap-4 px-2.5 text-foreground"
+                  onClick={()=>setScreen(2)}
+                >
+                  <PersonStandingIcon className="h-5 w-5" />
+                  Profile
+                </div>
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </header>
+        {
+          Screen==0? <Todomain/>:Screen==1?<Calendarmain/>:<ProfileMain/>
+        }
+      </div>
     </div>
-  );
+    </TooltipProvider>
+  )
 }
